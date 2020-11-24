@@ -30,8 +30,8 @@ app = FastAPI()
 
 
 @app.post("/predict", response_model=PredictResponse)
-def predict(input: PredictRequest, model: Model = Depends(get_model)):
-    X = np.array(input.data)
+def predict(ml_input: PredictRequest, model: Model = Depends(get_model)):
+    X = np.array(ml_input.data)
     y_pred = model.predict(X)
     result = PredictResponse(data=y_pred.tolist())
 
